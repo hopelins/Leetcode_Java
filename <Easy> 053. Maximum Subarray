@@ -16,33 +16,23 @@ If you have figured out the O(n) solution, try coding another solution using the
 conquer approach, which is more subtle.
 */
 
-
 class Solution {
-    public int[] plusOne(int[] digits) {
-        int[] ans = new int[digits.length];
-        // List<Integer> ans = new ArrayList<>();
-        int plusOne = 1;
-        int allNine=0;
+    public int maxSubArray(int[] nums) {
         
-        for(int i = digits.length-1;i>=0;i--){
-
-            ans[i] = (digits[i]+plusOne) % 10;
-            if(digits[i]+plusOne >= 10){
-                plusOne = 1;
-            }else{
-                plusOne =0;
+        int prevSum = nums[0];
+        int maxSum = nums[0];
+        for(int i =1;i<nums.length;i++){
+            if(prevSum>0) {
+                prevSum+=nums[i];
+            } else{
+                prevSum = nums[i];
             }
-            if(digits[i]==9) allNine ++;
-        }
-        if(allNine ==digits.length){
-            int[] newAns = new int[digits.length+1];
-            newAns[0] = 1;
-            return newAns;
+            maxSum = Math.max(maxSum,prevSum);
         }
         
-        return ans;
+        return maxSum;
+  
         
-
-
+        
     }
 }
